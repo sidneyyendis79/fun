@@ -1,0 +1,22 @@
+<apex:page standardController="Target__c">
+<div id="mapPlaceholder" style="width:500px;height:250px;"></div>
+<script src="https://maps.google.com/maps/api/js?sensor=false"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script>
+$(document).ready(function() {
+	var coords = new google.maps.LatLng({!Target__c.Location__Latitude__s}, {!Target__c.Location__Longitude__s});
+	var mapOptions = {
+					zoom: 15,
+					center: coords,
+					mapTypeControl: true,
+					mapTypeId: google.maps.MapTypeId.ROADMAP
+						};
+	var map = new google.maps.Map($("#mapPlaceholder")[0],mapOptions);
+	var marker = new google.maps.Marker({
+										position: coords,
+										map: map,
+										title: "{!Target__c.Name}"
+										});
+});
+</script>
+</apex:page>
